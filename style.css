@@ -2,5 +2,24 @@ body{
   background-color: #fff;
 }
 .container{
+  height: 700px;
+  width: 400px;
+  background-color: rgb(154, 154, 214);
+  display: block;
+  align-items: center;
+  justify-content: space-between;
+   margin-right: 30%;
+   margin-right: 30%;
+   margin: 0 auto;
+}
+#artist{
+  margin-left: 50px;
+  width: 300px;
+  border-radius: 5px;
+  margin-bottom: 15px;
   
+}
+#mp3{
+  margin-left: 30px;
+  margin-top: 20px;
 }
