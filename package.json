@@ -1,0 +1,15 @@
+{
+  "name": "music-app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "MIT",
+  "author": "gladys",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
