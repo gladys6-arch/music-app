@@ -11,7 +11,22 @@ let playlist= [];
 let currentIndex = -1;
 
 // fetch songs from JSON server
-fetch()
+fetch("http://localhost:3000/songs")
+.then(res=>res.json())
+.then(data=>{
+  allSongs = data;
+  console.log("Songs loaded",allSongs)
+});
+
+// adding event listers to search input
+searchInput.addEventListener('input',()=>{
+  const query= searchInput.Value.toLowerCase();
+  const results=allSongs.filter(song=>
+    song.title.toLowerCase().includes(query) ||
+    song.artist.toLowerCase().includes(query)
+  );
+  showSearchResults(results);
+})
 
 function togglePlay(){
   if(audio.src===""){
