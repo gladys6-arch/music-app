@@ -29,7 +29,7 @@ h1{
   margin: 5px;
   cursor: pointer;
   color: white;
-  border-radius: 50%;
+  border-radius: 5px;
  }
  ul{
   list-style: none;
@@ -50,5 +50,5 @@ h1{
   background: #dc3545;
  }
  .nav-btn{
-  background: #6c757d;
+  background: #ccd3da;
  }
