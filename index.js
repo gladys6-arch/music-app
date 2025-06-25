@@ -5,65 +5,57 @@ const playBtn=document.getElementById('play-btn');
 const searchInput=document.getElementById('search-input');
 const playlistElement=document.getElementById('playlist');
 const currentTitle=document.getElementById('current-song-title');
+const searchResults = document.getElementById('search-results');
 
 
 let playlist= [];
 let currentIndex = -1;
 
-// fetch songs from JSON server
-document.addEventListener("DOMContentLoaded",()=>{
-const searchResultsContainer= document.getElementById('search-results');
-  
-fetch("http://localhost:3000/songs")
-.then(res=>res.json())
-.then(data=>{
-  console.log("Songs loaded",data);
-  allSongs =data;
-  showSearchResults(data);
-})
-  .catch(error=>{
-    console.error('Failed to load songs:', error);
-  });
-
-
-
-});
-
 // adding event listers to search input
 
-searchInput.addEventListener('input',()=>{
-  const query= searchInput.value?.toLowerCase() || "";
-  const results=allSongs.filter(song=>
-    song.title?.toLowerCase().includes(query) ||
-    song.artist?.toLowerCase().includes(query)
-  );
-  showSearchResults(results);
+searchInput.addEventListener('input',async()=>{
+  const query= searchInput.value.trim();
+  
+   if(!query){
+    searchResults. innerHTML = '';
+    return;
+   }
+     searchResults.innerHTML= '<li>Searching...</li>';
+
+
+   try{
+    const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&limit=10`);
+    const data = await response.json();
+
+    if(data.results.length=== 0){
+      searchResults.innerHTML = '<li>No results found.</li>';
+    }else{
+      showSearchResults(data.results);
+    }
+
+   } catch(error){
+    searchResults.innerHTML =  '<li>Error fetching songs. Please check your internet connection.</li>';
+    console.error('Search failed:',  error);
+   }
+
+   
 });
 
-
+// show search results
 
 function showSearchResults(results){
-  const container = document.getElementById('search-results');
-  console.log('Search container:', container);
-  if(!container)return;
-
-  container.innerHTML = "";
-
-  results.forEach(song => {
-    const li =document.createElement('li');
-    li.textContent = `${song.title} - ${song.artist}`;
-
-
-    const addBtn = document.createElement('button');
-    addBtn.textContent = "➕";
-    addBtn.onclick = () =>addToPlaylist(song);
-
-    li.appendChild(addBtn)
-    container.appendChild(li)
+  searchResults.innerHTML='';
+  results.forEach(song=>{
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <img src="${song.artworkUrl60}" alt="Cover">
+      ${song.trackName} - ${song.artistName}
+    `;
+  })
     
-  });
+  };
   
-}
+
 
 // add song to playlist
 function addToPlaylist(song){
