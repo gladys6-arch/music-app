@@ -16,3 +16,39 @@ h1{
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
 }
+ input[type="search"]{
+  width: 90%;
+  padding: 6px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+
+ }
+ button{
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+ }
+ ul{
+  list-style: none;
+  padding: 0;
+ }
+ li{
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eee;
+  border-radius: 5px;
+ }
+ .contrls button{
+  background: #28a745;
+ }
+ .delete-btn{
+  background: #dc3545;
+ }
+ .nav-btn{
+  background: #6c757d;
+ }

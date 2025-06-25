@@ -8,7 +8,10 @@
 </head>
 <body>
   <h1>My Music App</h1>
-  <div class="player">
+  <div class="search-section">
+    <h3>Search Songs</h3>
+    <input id="search-input" type="search" placeholder="Search by song or artist">
+    <div class="player">
     <h3 id="current-song-title">No song playing</h3>
     <audio id="audio" controls style="width: 100%"><source id="audio-source" src="" type="audio/mpeg"></audio>
   <div class="controls">
@@ -17,11 +20,8 @@
     <button class="nav-btn" onclick="nextSong">⏭️</button>
   </div>
   </div>
-  <div class="search-section">
-    <h3>Search Songs</h3>
-    <input id="search-input" type="search" placeholder="Search by song or artist">
     <div class="playlist-section">
-    <h3>playlist</h3>
+    <h3>My Playlist</h3>
     <ul id="playlist"></ul>
     </div>
   </div>
