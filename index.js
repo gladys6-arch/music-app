@@ -11,17 +11,28 @@ let playlist= [];
 let currentIndex = -1;
 
 // fetch songs from JSON server
+document.addEventListener("DOMContentLoaded",()=>{
+const searchResultsContainer= document.getElementById('search-results');
+  
 fetch("http://localhost:3000/songs")
 .then(res=>res.json())
 .then(data=>{
-  allSongs = data;
-  console.log("Songs loaded",allSongs)
+  console.log("Songs loaded",data);
+  allSongs =data;
+  showSearchResults(data);
+})
+  .catch(error=>{
+    console.error('Failed to load songs:', error);
+  });
+
+
+
 });
 
 // adding event listers to search input
-window.addEventListener("DOMContentLoaded", () =>{
+
 searchInput.addEventListener('input',()=>{
-  const query= searchInput.Value?.toLowerCase() || "";
+  const query= searchInput.value?.toLowerCase() || "";
   const results=allSongs.filter(song=>
     song.title?.toLowerCase().includes(query) ||
     song.artist?.toLowerCase().includes(query)
@@ -29,18 +40,19 @@ searchInput.addEventListener('input',()=>{
   showSearchResults(results);
 });
 
-});
 
 
-
-function showSearchResults(){
-  const container = document.getElementById('search-resuits');
+function showSearchResults(results){
+  const container = document.getElementById('search-results');
   console.log('Search container:', container);
+  if(!container)return;
+
   container.innerHTML = "";
 
   results.forEach(song => {
     const li =document.createElement('li');
-    li.textContent = '${song.title} - ${song.artist}';
+    li.textContent = `${song.title} - ${song.artist}`;
+
 
     const addBtn = document.createElement('button');
     addBtn.textContent = "➕";
@@ -58,6 +70,7 @@ function addToPlaylist(song){
   playlist.push(song);
   renderPlaylist();
 }
+
 
 function removeFromPlaylist(index){
   if(index === currentIndex){
@@ -80,20 +93,21 @@ function playCurrentSong(){
     audioSource.src= song.url;
     audio.load();
     audio.play();
-    currentTitle.textContent = 'Now Playing: ${song.title} by ${song.artist}';
+    currentTitle.textContent = `Now Playing: ${song.title} by ${song.artist}`;
+
 
   }
 }
 
 function togglePlay(){
   if(audio.src===""){
-    playSong(currentIndex);
+    playCurrentSong();
 
   }else if(audio.paused){
     audio.play();
 
   } else{
-    audio.paused();
+    audio.pause();
   }
 }
 
