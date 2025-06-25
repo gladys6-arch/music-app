@@ -72,6 +72,27 @@ function addToPlaylist(song){
 }
 
 
+function renderPlaylist(){
+  playlistElement.innerHTML = "";
+
+playlist.forEach((song,index)=>{
+  const li= document.createElement('li');
+  li.textContent = `${song.title} - ${song.artist}`;
+
+  const removeBtn =document.createElement('button');
+  removeBtn.textContent ="🗑️";
+  removeBtn.onclick = () => removeFromPlaylist(index);
+
+
+   li.onclick = () =>{
+    currentIndex = index;
+    playCurrentSong();
+   };
+   li.appendChild(removeBtn);
+   playlistElement.appendChild(li);
+});
+}
+
 function removeFromPlaylist(index){
   if(index === currentIndex){
     audio.pause();
@@ -90,11 +111,11 @@ function removeFromPlaylist(index){
 function playCurrentSong(){
   if(currentIndex >= 0 && currentIndex < playlist.length){
     const song = playlist[currentIndex];
-    audioSource.src= song.url;
+    audio.src= song.url;
     audio.load();
-    audio.play();
-    currentTitle.textContent = `Now Playing: ${song.title} by ${song.artist}`;
-
+    audio.play().catch(err=>{
+      currentTitle.textContent = `Now Playing: ${song.title} by ${song.artist}`;
+    })
 
   }
 }
