@@ -28,6 +28,24 @@ searchInput.addEventListener('input',()=>{
   showSearchResults(results);
 })
 
+function showSearchResults(){
+  const container = document.getElementById('search-resuits');
+  container.innerHTML = "";
+
+  results.forEach(song => {
+    const list =document.createElement('li');
+    list.textContent = '${song.title} - ${song.artist}';
+
+    const addBtn = document.createElement('button');
+    addBtn.textContent = "➕";
+    addBtn.onclick = () =>addToPlaylist(song);
+
+    list.appendChild(addBtn)
+    container.appendChild(li)
+    
+  });
+}
+
 function togglePlay(){
   if(audio.src===""){
     playSong(currentIndex);
