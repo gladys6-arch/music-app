@@ -33,17 +33,38 @@ function showSearchResults(){
   container.innerHTML = "";
 
   results.forEach(song => {
-    const list =document.createElement('li');
-    list.textContent = '${song.title} - ${song.artist}';
+    const li =document.createElement('li');
+    li.textContent = '${song.title} - ${song.artist}';
 
     const addBtn = document.createElement('button');
     addBtn.textContent = "➕";
     addBtn.onclick = () =>addToPlaylist(song);
 
-    list.appendChild(addBtn)
+    li.appendChild(addBtn)
     container.appendChild(li)
     
   });
+  
+}
+
+// add song to playlist
+function addToPlaylist(song){
+  playlist.push(song);
+  renderPlaylist();
+}
+
+function removeFromPlaylist(index){
+  if(index === currentIndex){
+    audio.pause();
+    currentTitle.textContent = "No song playing";
+     
+  }
+  playlist.splice(index,1);
+
+  if(currentIndex > index) currentIndex--;
+  if(currentIndex >= playlist.length) currentIndex = 0;
+
+  renderPlaylist();
 }
 
 function togglePlay(){
