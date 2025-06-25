@@ -7,15 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    
-    <div class="image"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQAPf8-I1WPovXTBIwad0s7wautSTN4Ya73LbuWDtM3TBo-RmmgzjdKEI0l3RvINJCRGnbUMfZ83sCgptPF-7tcImd-fVknmX_RDV9f69l9ug" 
-      id="artist" alt="">
-      <h4>ariana grande</h4>
-    </div>
-    <audio controls><source id="mp3" src="song.mp3" type="audio"></audio>
-    
+  <h1>My Music App</h1>
+  <div class="player">
+    <h3 id="current-song-title">No song playing</h3>
+    <audio id="audio" controls style="width: 100%"><source id="audio-source" src="" type="audio/mpeg"></audio>
+  <div class="controls">
+    <button onclick="togglePlay()">▶️</button>
   </div>
-  
+  </div>
+  <div class="search-section"></div>
 </body>
 </html>
