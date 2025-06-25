@@ -6,7 +6,7 @@ const searchInput=document.getElementById('search-input');
 const playlistElement=document.getElementById('playlist');
 const currentTitle=document.getElementById('current-song-title');
 
-let allSongs = [];
+
 let playlist= [];
 let currentIndex = -1;
 
