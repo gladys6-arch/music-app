@@ -19,17 +19,23 @@ fetch("http://localhost:3000/songs")
 });
 
 // adding event listers to search input
+window.addEventListener("DOMContentLoaded", () =>{
 searchInput.addEventListener('input',()=>{
-  const query= searchInput.Value.toLowerCase();
+  const query= searchInput.Value?.toLowerCase() || "";
   const results=allSongs.filter(song=>
-    song.title.toLowerCase().includes(query) ||
-    song.artist.toLowerCase().includes(query)
+    song.title?.toLowerCase().includes(query) ||
+    song.artist?.toLowerCase().includes(query)
   );
   showSearchResults(results);
-})
+});
+
+});
+
+
 
 function showSearchResults(){
   const container = document.getElementById('search-resuits');
+  console.log('Search container:', container);
   container.innerHTML = "";
 
   results.forEach(song => {
@@ -67,6 +73,18 @@ function removeFromPlaylist(index){
   renderPlaylist();
 }
 
+
+function playCurrentSong(){
+  if(currentIndex >= 0 && currentIndex < playlist.length){
+    const song = playlist[currentIndex];
+    audioSource.src= song.url;
+    audio.load();
+    audio.play();
+    currentTitle.textContent = 'Now Playing: ${song.title} by ${song.artist}';
+
+  }
+}
+
 function togglePlay(){
   if(audio.src===""){
     playSong(currentIndex);
@@ -78,6 +96,22 @@ function togglePlay(){
     audio.paused();
   }
 }
+
+
+function nextSong(){
+  if(playlist.length === 0) return;
+  currentIndex = (currentIndex + 1) % playlist.length;
+  playCurrentSong();
+}
+
+function prevSong(){
+  if(playlist.length === 0)return;
+  currentIndex=(currentIndex - 1 + playlist.length)% playlist.length;
+  playCurrentSong();
+}
+ // auto play the next song
+audio.addEventListener('ended', nextSong);
+
 
 audio.addEventListener('play',()=>{
   playBtn.textContent ="⏸️";

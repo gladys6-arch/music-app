@@ -11,20 +11,23 @@
   <div class="search-section">
     <h3>Search Songs</h3>
     <input id="search-input" type="search" placeholder="Search by song or artist">
+    <ul id="search-results"></ul>
+
     <div class="player">
     <h3 id="current-song-title">No song playing</h3>
     <audio id="audio" controls></audio>
-  <div class="controls">
+   <div class="controls">
     <button class="nav-btn" onclick="prevSong()">⏮️</button>
     <button  onclick="togglePlay()">▶️</button>
-    <button class="nav-btn" onclick="nextSong">⏭️</button>
+    <button class="nav-btn" onclick="nextSong()">⏭️</button>
   </div>
   </div>
+
     <div class="playlist-section">
     <h3>My Playlist</h3>
     <ul id="playlist"></ul>
     </div>
   </div>
-  <script src="src/index.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>
